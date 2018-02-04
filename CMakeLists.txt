@@ -5,8 +5,9 @@ project(glucose)
 #--------------------------------------------------------------------------------------------------
 # Configurable options:
 
-option(STATIC_BINARIES "Link binaries statically." ON)
-option(USE_SORELEASE   "Use SORELEASE in shared library filename." ON)
+option(STATIC_BINARIES    "Link binaries statically." ON)
+option(USE_SORELEASE      "Use SORELEASE in shared library filename." ON)
+option(ENABLE_INCREMENTAL "Compile with support for INCREMENTAL mode." ON)
 
 #--------------------------------------------------------------------------------------------------
 # Library version:
@@ -35,6 +36,10 @@ include_directories(${glucose_SOURCE_DIR}/glucose/)
 # Compile flags:
 
 add_definitions(-D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -O3 -DNDEBUG -std=c++11)
+
+if (ENABLE_INCREMENTAL)
+  add_definitions(-DINCREMENTAL)
+endif()
 
 #--------------------------------------------------------------------------------------------------
 # Build Targets:
