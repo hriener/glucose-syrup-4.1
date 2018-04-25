@@ -28,9 +28,14 @@ set(GLUCOSE_SOVERSION ${GLUCOSE_SOMAJOR})
 # Dependencies:
 
 find_package(ZLIB REQUIRED)
-
 include_directories(${ZLIB_INCLUDE_DIRS})
 include_directories(${glucose_SOURCE_DIR}/glucose/)
+set(LIBS ${ZLIB_LIBRARY_RELEASE})
+
+find_package(Threads)
+if(CMAKE_USE_PTHREADS_INIT)
+  set(LIBS ${LIBS} ${CMAKE_THREAD_LIBS_INIT})
+endif()
 
 #--------------------------------------------------------------------------------------------------
 # Compile flags:
@@ -62,8 +67,8 @@ add_library(glucose-lib-shared SHARED ${GLUCOSE_LIB_SOURCES})
 target_include_directories(glucose-lib-static PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(glucose-lib-shared PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(glucose-lib-static ${ZLIB_LIBRARY_RELEASE})
-target_link_libraries(glucose-lib-shared ${ZLIB_LIBRARY_RELEASE})
+target_link_libraries(glucose-lib-static ${LIBS})
+target_link_libraries(glucose-lib-shared ${LIBS})
 
 add_executable(glucose glucose/simp/Main.cc)
 add_executable(glucose-syrup glucose/parallel/Main.cc)
