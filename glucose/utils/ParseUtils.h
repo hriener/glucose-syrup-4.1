@@ -37,7 +37,7 @@ static const int buffer_size = 1048576;
 
 class StreamBuffer {
     gzFile        in;
-    unsigned char buf[buffer_size];
+    unsigned char* buf;
     int           pos;
     int           size;
 
@@ -47,7 +47,8 @@ class StreamBuffer {
             size = gzread(in, buf, sizeof(buf)); } }
 
 public:
-    explicit StreamBuffer(gzFile i) : in(i), pos(0), size(0) { assureLookahead(); }
+    explicit StreamBuffer(gzFile i) : in(i), pos(0), size(0) { buf = new unsigned char[buffer_size]; assureLookahead(); }
+    ~StreamBuffer() { delete[] buf; }
 
     int  operator *  () const { return (pos >= size) ? EOF : buf[pos]; }
     void operator ++ ()       { pos++; assureLookahead(); }

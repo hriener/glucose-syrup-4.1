@@ -51,7 +51,9 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 #include <signal.h>
 #include <zlib.h>
+#ifndef _WIN32
 #include <sys/resource.h>
+#endif
 
 #include "utils/System.h"
 #include "utils/ParseUtils.h"
@@ -160,7 +162,11 @@ int main(int argc, char** argv)
         if(S.certifiedUNSAT) {
             if(!strcmp(opt_certified_file,"NULL")) {
                 S.vbyte =  false;  // Cannot write binary to stdout
+#ifdef _WIN32
+                S.certifiedOutput = stdout;
+#else
                 S.certifiedOutput =  fopen("/dev/stdout", "wb");
+#endif
                 if(S.verbosity >= 1)
                     printf("c\nc Write unsat proof on stdout using text format\nc\n");
             } else
@@ -171,6 +177,8 @@ int main(int argc, char** argv)
         }
 
         solver = &S;
+
+#ifndef _WIN32
         // Use signal handlers that forcibly quit until the solver will be able to respond to
         // interrupts:
         signal(SIGINT, SIGINT_exit);
@@ -197,6 +205,7 @@ int main(int argc, char** argv)
                 if (setrlimit(RLIMIT_AS, &rl) == -1)
                     printf("c WARNING! Could not set resource limit: Virtual memory.\n");
             } }
+#endif
 
         if (argc == 1)
             printf("c Reading from standard input... Use '--help' for help.\n");
@@ -222,10 +231,12 @@ int main(int argc, char** argv)
             printf("c |  Parse time:           %12.2f s                                                                 |\n", parsed_time - initial_time);
             printf("c |                                                                                                       |\n"); }
 
+#ifndef _WIN32
         // Change to signal-handlers that will only notify the solver and allow it to terminate
         // voluntarily:
         signal(SIGINT, SIGINT_interrupt);
         signal(SIGXCPU,SIGINT_interrupt);
+#endif
 
         S.parsing = 0;
         if(pre/* && !S.isIncremental()*/) {
@@ -238,7 +249,11 @@ int main(int argc, char** argv)
 	}
 	printf("c |                                                                                                       |\n");
         if (!S.okay()){
-            if (S.certifiedUNSAT) fprintf(S.certifiedOutput, "0\n"), fclose(S.certifiedOutput);
+            if (S.certifiedUNSAT) {
+               fprintf(S.certifiedOutput, "0\n"); 
+               if (S.certifiedOutput != stdout) 
+                  fclose(S.certifiedOutput);
+            }
             if (res != NULL) fprintf(res, "UNSAT\n"), fclose(res);
             if (S.verbosity > 0){
  	        printf("c =========================================================================================================\n");

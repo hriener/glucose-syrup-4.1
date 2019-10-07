@@ -321,10 +321,13 @@ Solver::~Solver() {
  Certified UNSAT proof in binary format
 ****************************************************************/
 
+#ifdef _WIN32
+#define putc_unlocked putc
+#endif
 
 void Solver::write_char(unsigned char ch) {
-    if(putc_unlocked((int) ch, certifiedOutput) == EOF)
-        exit(1);
+   if(putc_unlocked((int) ch, certifiedOutput) == EOF)
+         exit(1);
 }
 
 
