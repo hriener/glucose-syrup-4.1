@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="mtl">
+      <UniqueIdentifier>{5a7bac64-f52c-4c6f-b75b-81d093e63307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{fc28afc3-2fb4-41a8-87e5-b183f1e824e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="simp">
+      <UniqueIdentifier>{1282e626-c01d-47ef-85e1-f4399853f7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{10cfa91f-811f-4fe1-b870-1212f58fa0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fake_zlib">
+      <UniqueIdentifier>{5544b6fe-f3f3-40ca-a7dc-b20e7aa21627}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\glucose\core\Dimacs.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\core\Solver.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\core\SolverStats.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\core\SolverTypes.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\core\BoundedQueue.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\core\Constants.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Alg.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Alloc.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Clone.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Heap.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\IntTypes.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Map.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Queue.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Sort.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\Vec.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\VecThreads.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\mtl\XAlloc.h">
+      <Filter>mtl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\simp\SimpSolver.h">
+      <Filter>simp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\utils\ParseUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\utils\System.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\glucose\utils\Options.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="fake_zlib\zlib.h">
+      <Filter>fake_zlib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\glucose\core\Makefile">
+      <Filter>core</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\glucose\core\Solver.cc">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\glucose\simp\SimpSolver.cc">
+      <Filter>simp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\glucose\utils\System.cc">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\glucose\utils\Options.cc">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="fake_zlib\zlib.cpp">
+      <Filter>fake_zlib</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
